@@ -1,0 +1,43 @@
+.category-bar-container {
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.category-name {
+  color: #333;
+}
+
+.category-stats {
+  color: #666;
+}
+
+/* Custom progress bar colors */
+:host ::ng-deep .mat-mdc-progress-bar {
+  height: 8px !important;
+  border-radius: 4px;
+}
+
+:host .success ::ng-deep .mdc-linear-progress__bar-inner {
+  border-color: #4caf50 !important;
+}
+
+:host .warning ::ng-deep .mdc-linear-progress__bar-inner {
+  border-color: #ffc107 !important;
+}
+
+:host .danger ::ng-deep .mdc-linear-progress__bar-inner {
+  border-color: #f44336 !important;
+}
+
+/* Fallback background for bar track */
+:host ::ng-deep .mdc-linear-progress__buffer-bar {
+  background-color: #eee !important;
+}

@@ -1,0 +1,56 @@
+<div class="summary-container">
+  <div class="header">
+    <h2>Monthly Summary</h2>
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Month</mat-label>
+      <mat-select [(value)]="selectedMonth" (selectionChange)="onFilterChange()">
+        <mat-option *ngFor="let month of months" [value]="month.value">
+          {{ month.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="stat-cards-container">
+    <app-stat-card title="Total Income" [value]="totalIncome"></app-stat-card>
+    <app-stat-card title="Total Spent" [value]="totalSpent"></app-stat-card>
+    <app-stat-card title="Total Saved" [value]="totalSaved"></app-stat-card>
+  </div>
+
+  <div class="health-score-container">
+    <mat-card class="score-card">
+      <mat-card-header>
+        <mat-card-title>Financial Health Score</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="score-content">
+        <div class="score-circle" [ngClass]="getScoreColorClass()">
+          <span class="score-value">{{ healthScore }}</span>
+          <span class="score-label">/ 100</span>
+        </div>
+        
+        <div class="breakdown-container">
+          <h3>Budget Breakdown</h3>
+          
+          <div *ngIf="overBudgetCategories.length === 0" class="good-standing">
+            <mat-icon>check_circle</mat-icon>
+            <p>Great job! You stayed within budget for all categories this month.</p>
+          </div>
+
+          <div *ngIf="overBudgetCategories.length > 0">
+            <p class="warning-text">You exceeded your budget in {{ overBudgetCategories.length }} categories:</p>
+            <mat-list>
+              <mat-list-item *ngFor="let cat of overBudgetCategories">
+                <span matListItemIcon>{{ cat.icon }}</span>
+                <span matListItemTitle>{{ cat.name }}</span>
+                <span matListItemLine class="over-by-text">
+                  Over by {{ cat.overBy | currency: 'INR' : 'symbol' : '1.0-0' }}
+                </span>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

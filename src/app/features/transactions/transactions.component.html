@@ -1,0 +1,40 @@
+<div class="transactions-container">
+  <div class="header">
+    <h2>Monthly Transactions</h2>
+    
+    <div class="filters">
+      <mat-form-field appearance="outline">
+        <mat-label>Month</mat-label>
+        <mat-select [(value)]="selectedMonth" (selectionChange)="onFilterChange()">
+          <mat-option *ngFor="let month of months" [value]="month.value">
+            {{ month.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select [(value)]="selectedCategory" (selectionChange)="onFilterChange()">
+          <mat-option value="All">All Categories</mat-option>
+          <mat-option *ngFor="let cat of categories" [value]="cat.name">
+            {{ cat.icon }} {{ cat.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="transactions-list">
+    <div *ngIf="filteredExpenses.length === 0" class="empty-state">
+      <mat-icon>receipt_long</mat-icon>
+      <p>No transactions found for this period.</p>
+    </div>
+
+    <div *ngFor="let exp of filteredExpenses" class="expense-list-item">
+      <app-expense-row [expense]="exp"></app-expense-row>
+      <button mat-icon-button color="warn" class="delete-btn" (click)="onDelete(exp.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="expense-row" *ngIf="expense">
+  <div class="category-icon" [style.background-color]="categoryInfo?.color || '#eee'">
+    {{ categoryInfo?.icon || '📦' }}
+  </div>
+  
+  <div class="expense-details">
+    <div class="category-name">{{ expense.category }}</div>
+    <div class="expense-note" *ngIf="expense.note">{{ expense.note }}</div>
+    <div class="expense-date">{{ expense.date | date: 'mediumDate' }}</div>
+  </div>
+  
+  <div class="expense-amount">
+    {{ expense.amount | currency: 'INR' : 'symbol' : '1.0-0' }}
+  </div>
+</div>

@@ -1,0 +1,22 @@
+.stat-card {
+  margin: 10px;
+  flex: 1;
+}
+
+mat-card-header {
+  padding: 16px;
+}
+
+mat-card-subtitle {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #666;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+mat-card-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111;
+}

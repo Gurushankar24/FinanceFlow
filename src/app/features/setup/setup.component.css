@@ -1,0 +1,38 @@
+.setup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 100px);
+  padding: 20px;
+}
+
+.setup-card {
+  max-width: 800px;
+  width: 100%;
+}
+
+.setup-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.budget-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.submit-btn {
+  height: 50px;
+  font-size: 1.1rem;
+}
+
+h3 {
+  margin: 16px 0;
+}

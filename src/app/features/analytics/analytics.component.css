@@ -1,0 +1,94 @@
+.analytics-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.chart-card {
+  padding: 16px;
+}
+
+.chart-wrapper {
+  position: relative;
+  height: 350px;
+  width: 100%;
+}
+
+.table-card {
+  margin-top: 24px;
+}
+
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.summary-table th, .summary-table td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.summary-table th {
+  background-color: #fafafa;
+  font-weight: 600;
+  color: #666;
+}
+
+.text-success {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.text-danger {
+  color: #f44336;
+  font-weight: 600;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px;
+  background: white;
+  border-radius: 12px;
+  border: 2px dashed #e2e8f0;
+  color: #64748b;
+}
+
+.empty-state mat-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+  color: #94a3b8;
+}
+
+.empty-state p {
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+}

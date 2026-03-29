@@ -1,0 +1,60 @@
+.dashboard-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stat-cards-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.category-bars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .stat-cards-container {
+    flex-direction: column;
+  }
+}
+
+.fab-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  background: white;
+  border-radius: 12px;
+  border: 2px dashed #e2e8f0;
+  color: #64748b;
+}
+
+.empty-state mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 12px;
+  color: #94a3b8;
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}

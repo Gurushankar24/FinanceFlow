@@ -1,0 +1,10 @@
+<div class="category-bar-container" [ngClass]="status">
+  <div class="category-header">
+    <span class="category-name">{{ categoryName }}</span>
+    <span class="category-stats">
+      {{ spentAmount | currency: 'INR' : 'symbol' : '1.0-0' }} / 
+      {{ budgetLimit | currency: 'INR' : 'symbol' : '1.0-0' }}
+    </span>
+  </div>
+  <mat-progress-bar mode="determinate" [value]="percentage"></mat-progress-bar>
+</div>

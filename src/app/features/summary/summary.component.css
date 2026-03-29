@@ -1,0 +1,115 @@
+.summary-container {
+  padding: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.stat-cards-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.health-score-container {
+  display: flex;
+  justify-content: center;
+}
+
+.score-card {
+  width: 100%;
+  max-width: 800px;
+  padding: 24px;
+}
+
+.score-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 40px 0;
+  gap: 40px;
+}
+
+.score-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 12px solid #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.score-value {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.score-label {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.score-green { border-color: #4caf50; color: #4caf50; }
+.score-yellow { border-color: #ffc107; color: #ffb300; }
+.score-red { border-color: #f44336; color: #f44336; }
+
+.breakdown-container {
+  flex: 1;
+}
+
+.breakdown-container h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.good-standing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #4caf50;
+  text-align: center;
+  padding: 20px;
+}
+
+.good-standing mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 12px;
+}
+
+.warning-text {
+  color: #666;
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
+.over-by-text {
+  color: #f44336;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .stat-cards-container {
+    flex-direction: column;
+  }
+  
+  .score-content {
+    flex-direction: column;
+    padding: 20px 0;
+  }
+}

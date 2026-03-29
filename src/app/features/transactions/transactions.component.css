@@ -1,0 +1,77 @@
+.transactions-container {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+h2 {
+  margin: 0;
+  font-weight: 600;
+  color: #333;
+}
+
+.filters {
+  display: flex;
+  gap: 16px;
+}
+
+mat-form-field {
+  width: 180px;
+}
+
+.expense-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+app-expense-row {
+  flex: 1;
+}
+
+.delete-btn {
+  flex-shrink: 0;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 0;
+  color: #999;
+}
+
+.empty-state mat-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+  opacity: 0.3;
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .filters {
+    width: 100%;
+  }
+  
+  mat-form-field {
+    flex: 1;
+  }
+}

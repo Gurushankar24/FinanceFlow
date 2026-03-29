@@ -1,0 +1,30 @@
+<div class="dashboard-container" *ngIf="profile">
+  <div class="stat-cards-container">
+    <app-stat-card title="Total Income" [value]="totalIncome"></app-stat-card>
+    <app-stat-card title="Total Spent" [value]="totalSpent"></app-stat-card>
+    <app-stat-card title="Total Saved" [value]="totalSaved"></app-stat-card>
+  </div>
+
+  <div class="category-bars-container">
+    <h2 class="section-title">Budget by Category</h2>
+    
+    <div *ngIf="!hasExpenses" class="empty-state">
+      <mat-icon>savings</mat-icon>
+      <p>No expenses recorded this month yet.</p>
+      <button mat-stroked-button color="primary" routerLink="/add-expense">Add your first expense</button>
+    </div>
+
+    <div class="category-bars-grid" *ngIf="hasExpenses">
+      <app-category-bar
+        *ngFor="let cat of categories"
+        [categoryName]="cat.name"
+        [spentAmount]="spentByCategory[cat.name] || 0"
+        [budgetLimit]="profile.budgets[cat.name] || 0"
+      ></app-category-bar>
+    </div>
+  </div>
+
+  <button mat-fab color="primary" class="fab-btn" routerLink="/add-expense" matTooltip="Add Expense">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

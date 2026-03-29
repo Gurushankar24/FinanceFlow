@@ -1,0 +1,36 @@
+.add-expense-container {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  min-height: calc(100vh - 150px);
+}
+
+.add-expense-card {
+  max-width: 600px;
+  width: 100%;
+}
+
+mat-card-header {
+  margin-bottom: 16px;
+}
+
+.expense-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+button {
+  padding: 0 32px;
+  height: 48px;
+}
