@@ -23,7 +23,7 @@
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Amount</mat-label>
           <input matInput type="number" formControlName="amount" placeholder="e.g. 500" />
-          <span matPrefix>₹&nbsp;</span>
+          <span matPrefix>₹</span>
           <mat-error *ngIf="expenseForm.get('amount')?.hasError('required')">
             Amount is required
           </mat-error>

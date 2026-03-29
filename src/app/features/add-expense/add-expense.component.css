@@ -34,3 +34,10 @@ button {
   padding: 0 32px;
   height: 48px;
 }
+
+[matPrefix] {
+  margin-left: 12px;
+  margin-right: 4px;
+  color: #64748b;
+  font-weight: 500;
+}
