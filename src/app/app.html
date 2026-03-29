@@ -1,13 +1,67 @@
-<nav class="nav">
-  <span class="nav-title">FinanceFlow</span>
-  <a routerLink="/setup" routerLinkActive="active">Setup</a>
-  <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-  <a routerLink="/add-expense" routerLinkActive="active">Add Expense</a>
-  <a routerLink="/transactions" routerLinkActive="active">Transactions</a>
-  <a routerLink="/analytics" routerLinkActive="active">Analytics</a>
-  <a routerLink="/summary" routerLinkActive="active">Summary</a>
-</nav>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h2 class="sidebar-title">The Human Ledger</h2>
+  </div>
 
-<main class="content">
-  <router-outlet />
-</main>
+  <nav class="sidebar-nav">
+    <a routerLink="/dashboard" routerLinkActive="active" class="nav-link">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </a>
+    <a routerLink="/analytics" routerLinkActive="active" class="nav-link">
+      <mat-icon>trending_up</mat-icon>
+      <span>Trends</span>
+    </a>
+    <a routerLink="/transactions" routerLinkActive="active" class="nav-link">
+      <mat-icon>history</mat-icon>
+      <span>Activity</span>
+    </a>
+    <a routerLink="/summary" routerLinkActive="active" class="nav-link">
+      <mat-icon>flag</mat-icon>
+      <span>Goals</span>
+    </a>
+    <a routerLink="/setup" routerLinkActive="active" class="nav-link">
+      <mat-icon>settings</mat-icon>
+      <span>Settings</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer" *ngIf="profile">
+    <div class="user-profile">
+      <div class="user-avatar">
+        {{ profile.salary.toString().charAt(0) }}
+      </div>
+      <div class="user-info">
+        <span class="greeting">Good morning</span>
+        <span class="status">Your Ledger is healthy</span>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<div class="main-wrapper">
+  <header class="top-bar">
+    <div class="header-container">
+      <h1 class="logo">FinanceFlow</h1>
+      <div class="header-actions">
+        <button mat-flat-button color="primary" class="add-spend-btn" routerLink="/add-expense">
+          <mat-icon>add</mat-icon>
+          Add a Spend
+        </button>
+        <button mat-icon-button class="notifications-btn">
+          <mat-icon>notifications</mat-icon>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="content-area">
+    <router-outlet />
+  </main>
+</div>
+
+<!-- Custom Toast (managed via a simple signal or variable in real apps, but here we just show the structure) -->
+<div class="custom-toast" *ngIf="showToast">
+  <span>Spend Added successfully!</span>
+  <button (click)="showToast = false">Undo</button>
+</div>

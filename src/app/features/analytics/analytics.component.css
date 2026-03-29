@@ -1,35 +1,38 @@
 .analytics-container {
-  padding: 24px;
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 32px;
+}
+
+h2 {
+  font-size: 24px;
+  color: var(--text-primary);
 }
 
 .charts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
   margin-bottom: 32px;
 }
 
 .chart-card {
-  padding: 16px;
+  height: 100%;
 }
 
 .chart-wrapper {
+  height: 300px;
   position: relative;
-  height: 350px;
-  width: 100%;
 }
 
 .table-card {
-  margin-top: 24px;
+  margin-top: 32px;
 }
 
 .summary-table {
@@ -38,56 +41,35 @@
   margin-top: 16px;
 }
 
-.summary-table th, .summary-table td {
-  text-align: left;
-  padding: 12px;
-  border-bottom: 1px solid #eee;
-}
-
 .summary-table th {
-  background-color: #fafafa;
-  font-weight: 600;
-  color: #666;
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  border-bottom: 1px solid var(--border-card);
 }
 
-.text-success {
-  color: #4caf50;
-  font-weight: 600;
+.summary-table td {
+  padding: 16px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border-card);
 }
 
-.text-danger {
-  color: #f44336;
-  font-weight: 600;
-}
+.text-success { color: var(--accent-green); font-weight: 700; }
+.text-danger { color: var(--accent-red); font-weight: 700; }
 
 .empty-state {
   text-align: center;
-  padding: 60px;
-  background: white;
-  border-radius: 12px;
-  border: 2px dashed #e2e8f0;
-  color: #64748b;
+  padding: 80px 0;
+  background-color: var(--bg-card);
+  border-radius: 32px;
+  color: var(--text-muted);
 }
 
-.empty-state mat-icon {
-  font-size: 64px;
-  width: 64px;
-  height: 64px;
-  margin-bottom: 16px;
-  color: #94a3b8;
-}
-
-.empty-state p {
-  font-size: 1.2rem;
-  margin-bottom: 24px;
-}
-
-@media (max-width: 600px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
+@media (max-width: 1024px) {
   .charts-grid {
     grid-template-columns: 1fr;
   }

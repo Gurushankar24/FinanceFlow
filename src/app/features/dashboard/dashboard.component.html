@@ -1,30 +1,72 @@
 <div class="dashboard-container" *ngIf="profile">
-  <div class="stat-cards-container">
-    <app-stat-card title="Total Income" [value]="totalIncome"></app-stat-card>
-    <app-stat-card title="Total Spent" [value]="totalSpent"></app-stat-card>
-    <app-stat-card title="Total Saved" [value]="totalSaved"></app-stat-card>
-  </div>
+  <header class="welcome-section">
+    <h2 class="welcome-title">Good morning, Guru! 👋</h2>
+    <p class="welcome-subtitle">You've saved {{ totalSaved | currency: 'INR' : 'symbol' : '1.0-0' }} this month. Keep it up!</p>
+  </header>
 
-  <div class="category-bars-container">
-    <h2 class="section-title">Budget by Category</h2>
-    
+  <section class="top-cards">
+    <div class="balance-card">
+      <div class="balance-main">
+        <span class="label">Total Balance</span>
+        <h3 class="amount">{{ totalIncome | currency: 'INR' : 'symbol' : '1.0-0' }}</h3>
+      </div>
+      <div class="balance-stats">
+        <div class="stat-item">
+          <span class="stat-label">Spent</span>
+          <span class="stat-value spent">{{ totalSpent | currency: 'INR' : 'symbol' : '1.0-0' }}</span>
+        </div>
+        <div class="divider"></div>
+        <div class="stat-item">
+          <span class="stat-label">Saved</span>
+          <span class="stat-value saved">{{ totalSaved | currency: 'INR' : 'symbol' : '1.0-0' }}</span>
+        </div>
+      </div>
+      <div class="safe-to-spend">
+        <span class="safe-label">Safe to Spend</span>
+        <span class="safe-value">{{ (totalIncome - totalSpent) | currency: 'INR' : 'symbol' : '1.0-0' }}</span>
+        <span class="safe-period">Until next payday</span>
+      </div>
+    </div>
+
+    <div class="health-card">
+      <div class="health-info">
+        <h4 class="health-title">Great Health</h4>
+        <p class="health-subtitle">Your ledger is in good shape</p>
+        <button mat-button class="improve-btn">How to improve?</button>
+      </div>
+      <div class="health-chart">
+        <div class="circular-progress">
+          <span class="emoji">😊</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories-section">
+    <div class="section-header">
+      <div class="header-info">
+        <h3 class="section-title">Where it's going</h3>
+        <p class="section-subtitle">Top categories this month</p>
+      </div>
+      <button mat-button class="view-all-btn" routerLink="/analytics">View Breakdown</button>
+    </div>
+
+    <div class="categories-bubbles" *ngIf="hasExpenses">
+      <div 
+        *ngFor="let cat of categories.slice(0, 4); let i = index" 
+        class="category-bubble-item"
+        [ngClass]="'bubble-' + i"
+      >
+        <div class="bubble" [style.background-color]="cat.color + '20'" [style.border-color]="cat.color">
+           <span class="bubble-amount">{{ spentByCategory[cat.name] || 0 | currency: 'INR' : 'symbol' : '1.0-0' }}</span>
+        </div>
+        <span class="bubble-label">{{ cat.name }}</span>
+      </div>
+    </div>
+
     <div *ngIf="!hasExpenses" class="empty-state">
       <mat-icon>savings</mat-icon>
       <p>No expenses recorded this month yet.</p>
-      <button mat-stroked-button color="primary" routerLink="/add-expense">Add your first expense</button>
     </div>
-
-    <div class="category-bars-grid" *ngIf="hasExpenses">
-      <app-category-bar
-        *ngFor="let cat of categories"
-        [categoryName]="cat.name"
-        [spentAmount]="spentByCategory[cat.name] || 0"
-        [budgetLimit]="profile.budgets[cat.name] || 0"
-      ></app-category-bar>
-    </div>
-  </div>
-
-  <button mat-fab color="primary" class="fab-btn" routerLink="/add-expense" matTooltip="Add Expense">
-    <mat-icon>add</mat-icon>
-  </button>
+  </section>
 </div>

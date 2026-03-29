@@ -1,15 +1,16 @@
-<div class="expense-row" *ngIf="expense">
-  <div class="category-icon" [style.background-color]="categoryInfo?.color || '#eee'">
-    {{ categoryInfo?.icon || '📦' }}
+<div class="expense-row-card" *ngIf="expense">
+  <div class="transaction-left">
+    <div class="app-logo-circle" [style.background-color]="categoryInfo?.color + '15'">
+      <span class="category-icon">{{ categoryInfo?.icon }}</span>
+    </div>
+    <div class="transaction-info">
+      <span class="merchant-name">{{ expense.note || expense.category }}</span>
+      <span class="transaction-time">{{ expense.date | date: 'EEEE • h:mm a' }}</span>
+    </div>
   </div>
   
-  <div class="expense-details">
-    <div class="category-name">{{ expense.category }}</div>
-    <div class="expense-note" *ngIf="expense.note">{{ expense.note }}</div>
-    <div class="expense-date">{{ expense.date | date: 'mediumDate' }}</div>
-  </div>
-  
-  <div class="expense-amount">
-    {{ expense.amount | currency: 'INR' : 'symbol' : '1.0-0' }}
+  <div class="transaction-right">
+    <span class="transaction-amount">-{{ expense.amount | currency: 'INR' : 'symbol' : '1.0-2' }}</span>
+    <span class="category-tag">{{ expense.category }}</span>
   </div>
 </div>

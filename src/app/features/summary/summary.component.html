@@ -1,56 +1,86 @@
 <div class="summary-container">
-  <div class="header">
-    <h2>Monthly Summary</h2>
-    
-    <mat-form-field appearance="outline">
-      <mat-label>Month</mat-label>
-      <mat-select [(value)]="selectedMonth" (selectionChange)="onFilterChange()">
+  <header class="section-header">
+    <h2 class="section-title">Monthly Summary</h2>
+    <div class="filter-item">
+      <mat-select [(value)]="selectedMonth" (selectionChange)="onFilterChange()" class="custom-select">
         <mat-option *ngFor="let month of months" [value]="month.value">
           {{ month.name }}
         </mat-option>
       </mat-select>
-    </mat-form-field>
-  </div>
+    </div>
+  </header>
 
-  <div class="stat-cards-container">
-    <app-stat-card title="Total Income" [value]="totalIncome"></app-stat-card>
-    <app-stat-card title="Total Spent" [value]="totalSpent"></app-stat-card>
-    <app-stat-card title="Total Saved" [value]="totalSaved"></app-stat-card>
-  </div>
-
-  <div class="health-score-container">
-    <mat-card class="score-card">
-      <mat-card-header>
-        <mat-card-title>Financial Health Score</mat-card-title>
-      </mat-card-header>
-      <mat-card-content class="score-content">
-        <div class="score-circle" [ngClass]="getScoreColorClass()">
-          <span class="score-value">{{ healthScore }}</span>
-          <span class="score-label">/ 100</span>
-        </div>
-        
-        <div class="breakdown-container">
-          <h3>Budget Breakdown</h3>
+  <section class="summary-grid">
+    <div class="main-summary">
+      <div class="health-overview-card" [ngClass]="getScoreColorClass()">
+        <div class="health-content">
+          <h3 class="health-title">Financial Health</h3>
+          <p class="health-score-text">Your score is <strong>{{ healthScore }}/100</strong></p>
           
-          <div *ngIf="overBudgetCategories.length === 0" class="good-standing">
-            <mat-icon>check_circle</mat-icon>
-            <p>Great job! You stayed within budget for all categories this month.</p>
+          <div class="health-visual">
+            <div class="score-circle">
+               <span class="emoji">{{ healthScore > 80 ? '😊' : healthScore > 50 ? '😐' : '😟' }}</span>
+            </div>
           </div>
 
-          <div *ngIf="overBudgetCategories.length > 0">
-            <p class="warning-text">You exceeded your budget in {{ overBudgetCategories.length }} categories:</p>
-            <mat-list>
-              <mat-list-item *ngFor="let cat of overBudgetCategories">
-                <span matListItemIcon>{{ cat.icon }}</span>
-                <span matListItemTitle>{{ cat.name }}</span>
-                <span matListItemLine class="over-by-text">
-                  Over by {{ cat.overBy | currency: 'INR' : 'symbol' : '1.0-0' }}
-                </span>
-              </mat-list-item>
-            </mat-list>
+          <div class="budget-status">
+            <div *ngIf="overBudgetCategories.length === 0" class="status-good">
+              <mat-icon>check_circle</mat-icon>
+              <span>Perfect! All categories within budget.</span>
+            </div>
+            <div *ngIf="overBudgetCategories.length > 0" class="status-warning">
+              <mat-icon>warning</mat-icon>
+              <span>You've exceeded budget in {{ overBudgetCategories.length }} categories.</span>
+            </div>
           </div>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
+      </div>
+
+      <div class="over-budget-list" *ngIf="overBudgetCategories.length > 0">
+        <h4 class="list-title">Needs Attention</h4>
+        <div class="over-budget-items">
+          <div *ngFor="let cat of overBudgetCategories" class="over-budget-card">
+            <div class="cat-info">
+              <span class="cat-icon">{{ cat.icon }}</span>
+              <span class="cat-name">{{ cat.name }}</span>
+            </div>
+            <span class="over-amount">Over by {{ cat.overBy | currency: 'INR' : 'symbol' : '1.0-0' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="goals-sidebar">
+      <div class="goals-card">
+        <h4 class="card-title">Savings Goal</h4>
+        <div class="goal-items">
+          <div class="goal-item">
+            <div class="goal-header">
+              <span class="goal-name">New MacBook Air</span>
+              <span class="goal-progress">₹85,000 / ₹1,20,000</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-bar" style="width: 70%"></div>
+            </div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-header">
+              <span class="goal-name">Goa Trip 🌴</span>
+              <span class="goal-progress">₹15,000 / ₹20,000</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-bar" style="width: 75%"></div>
+            </div>
+          </div>
+        </div>
+        <button mat-stroked-button class="add-goal-btn">Create new goal</button>
+      </div>
+
+      <div class="tip-card">
+        <h4 class="tip-title">Friendly Tip</h4>
+        <p class="tip-text">You've spent 15% more on Food this week than usual. Maybe cook at home tonight? 👨‍🍳</p>
+        <button mat-button class="tip-action">See detailed trends</button>
+      </div>
+    </div>
+  </section>
 </div>

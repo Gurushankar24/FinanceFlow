@@ -1,43 +1,123 @@
 .add-expense-container {
   display: flex;
   justify-content: center;
-  padding: 24px;
-  min-height: calc(100vh - 150px);
+  align-items: center;
+  min-height: 60vh;
 }
 
-.add-expense-card {
-  max-width: 600px;
+.form-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 32px;
+  padding: 48px;
   width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
-mat-card-header {
-  margin-bottom: 16px;
+.form-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.form-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
 }
 
 .expense-form {
   display: flex;
   flex-direction: column;
+  gap: 24px;
 }
 
-.full-width {
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.custom-input, .custom-textarea, .custom-select-field {
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--text-primary);
   width: 100%;
-  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+.custom-textarea {
+  resize: none;
+}
+
+.input-with-prefix {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-with-prefix .prefix {
+  position: absolute;
+  left: 16px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.input-with-prefix .custom-input {
+  padding-left: 36px;
+}
+
+.datepicker-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.datepicker-wrapper ::ng-deep .mat-mdc-datepicker-toggle {
+  position: absolute;
+  right: 8px;
+}
+
+.field-error {
+  font-size: 12px;
+  color: var(--accent-red);
+  font-weight: 500;
 }
 
 .form-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 16px;
+  margin-top: 8px;
 }
 
-button {
-  padding: 0 32px;
-  height: 48px;
+.submit-btn {
+  width: 100%;
+  height: 56px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  border-radius: 9999px !important;
 }
 
-[matPrefix] {
-  margin-left: 12px;
-  margin-right: 4px;
-  color: #64748b;
-  font-weight: 500;
+.custom-select-field {
+  padding: 0;
+}
+
+::ng-deep .mat-mdc-select-trigger {
+  padding: 12px 16px;
 }

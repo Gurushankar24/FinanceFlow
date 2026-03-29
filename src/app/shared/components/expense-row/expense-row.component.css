@@ -1,53 +1,73 @@
-.expense-row {
+.expense-row-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 32px;
+  transition: all 0.2s ease;
+}
+
+.expense-row-card:hover {
+  border-color: var(--accent-green-light);
+  background-color: #fafafa;
+}
+
+.transaction-left {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  margin-bottom: 8px;
   gap: 16px;
 }
 
-.category-icon {
+.app-logo-circle {
   width: 48px;
   height: 48px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  color: white;
   flex-shrink: 0;
 }
 
-.expense-details {
-  flex: 1;
+.category-icon {
+  font-size: 20px;
+}
+
+.transaction-info {
   display: flex;
   flex-direction: column;
+  gap: 2px;
 }
 
-.category-name {
-  font-weight: 600;
-  font-size: 1rem;
-  color: #333;
-}
-
-.expense-note {
-  font-size: 0.9rem;
-  color: #666;
-  margin-top: 2px;
-}
-
-.expense-date {
-  font-size: 0.8rem;
-  color: #999;
-  margin-top: 4px;
-}
-
-.expense-amount {
+.merchant-name {
+  font-size: 16px;
   font-weight: 700;
-  font-size: 1.1rem;
-  color: #d32f2f;
-  white-space: nowrap;
+  color: var(--text-primary);
+}
+
+.transaction-time {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.transaction-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.transaction-amount {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent-red);
+}
+
+.category-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 1px;
 }

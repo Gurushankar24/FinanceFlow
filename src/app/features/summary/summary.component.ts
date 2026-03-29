@@ -5,6 +5,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { ExpenseService } from '../../core/services/expense.service';
 import { StatCardComponent } from '../../shared/components/stat-card/stat-card.component';
 import { CATEGORIES } from '../../shared/constants/categories';
@@ -19,6 +20,7 @@ import { CATEGORIES } from '../../shared/constants/categories';
     MatCardModule,
     MatListModule,
     MatIconModule,
+    MatButtonModule,
     StatCardComponent,
   ],
   templateUrl: './summary.component.html',
