@@ -77,10 +77,11 @@ export class AddExpenseComponent implements OnInit {
 
       this.expenseService.addExpense(newExpense);
       
-      this.snackBar.open('Expense added successfully!', 'Close', {
+      this.snackBar.open('Spend recorded! Your ledger is updated.', 'Close', {
         duration: 3000,
         horizontalPosition: 'right',
         verticalPosition: 'top',
+        panelClass: ['success-snackbar']
       });
 
       this.resetForm();
@@ -88,6 +89,7 @@ export class AddExpenseComponent implements OnInit {
   }
 
   private resetForm(): void {
+    // Correct way to reset without triggering immediate validation errors
     this.expenseForm.reset({
       category: '',
       amount: null,
@@ -95,9 +97,8 @@ export class AddExpenseComponent implements OnInit {
       note: '',
     });
     
-    // Clear validation errors after reset
-    Object.keys(this.expenseForm.controls).forEach(key => {
-      this.expenseForm.get(key)?.setErrors(null);
-    });
+    // Explicitly mark as untouched/pristine to clear CSS error classes
+    this.expenseForm.markAsPristine();
+    this.expenseForm.markAsUntouched();
   }
 }

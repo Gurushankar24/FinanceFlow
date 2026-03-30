@@ -22,7 +22,6 @@ import { MONTHS } from '../../shared/constants/months';
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    StatCardComponent,
   ],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.css',
@@ -39,6 +38,7 @@ export class SummaryComponent implements OnInit {
   totalSaved: number = 0;
   healthScore: number = 0;
   overBudgetCategories: any[] = [];
+  budgetBreakdown: any[] = [];
 
   constructor() {
     // Automatically re-run updateSummary whenever the expenses signal in the service changes
@@ -80,6 +80,34 @@ export class SummaryComponent implements OnInit {
       icon: cat.icon,
       overBy: (spentByCategory[cat.name] || 0) - (profile.budgets[cat.name] || 0),
     }));
+
+    // 4. Full Budget Breakdown
+    this.budgetBreakdown = CATEGORIES.map((cat) => {
+      const budget = profile.budgets[cat.name] || 0;
+      const spent = spentByCategory[cat.name] || 0;
+      const isOver = spent > budget;
+      const percent = budget > 0 ? Math.min(100, (spent / budget) * 100) : spent > 0 ? 100 : 0;
+      const diff = Math.abs(budget - spent);
+
+      return {
+        name: cat.name,
+        icon: cat.icon,
+        budget,
+        spent,
+        percent,
+        isOver,
+        statusLabel: isOver ? `Over by ${this.formatCurrency(diff)}` : `${this.formatCurrency(diff)} remaining`,
+        color: isOver ? 'var(--accent-red)' : 'var(--accent-green)'
+      };
+    });
+  }
+
+  private formatCurrency(amount: number): string {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0
+    }).format(amount);
   }
 
   getScoreColorClass(): string {

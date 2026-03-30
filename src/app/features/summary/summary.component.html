@@ -49,5 +49,30 @@
         </div>
       </div>
     </div>
+
+    <div class="budget-breakdown-section">
+      <h3 class="list-title">Budget Breakdown</h3>
+      <div class="breakdown-grid">
+        <div *ngFor="let item of budgetBreakdown" class="breakdown-card">
+          <div class="card-top">
+            <div class="cat-info">
+              <span class="cat-icon">{{ item.icon }}</span>
+              <span class="cat-name">{{ item.name }}</span>
+            </div>
+            <span class="budget-info">
+              {{ item.spent | currency: 'INR' : 'symbol' : '1.0-0' }} / {{ item.budget | currency: 'INR' : 'symbol' : '1.0-0' }}
+            </span>
+          </div>
+          
+          <div class="progress-container">
+            <div class="progress-bar" [style.width.%]="item.percent" [style.background-color]="item.color"></div>
+          </div>
+          
+          <div class="card-bottom">
+            <span class="status-label" [style.color]="item.color">{{ item.statusLabel }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </div>

@@ -16,7 +16,13 @@ export class StorageService {
   getItem<T>(key: string): T | null {
     if (isPlatformBrowser(this.platformId)) {
       const data = localStorage.getItem(key);
-      return data ? JSON.parse(data) : null;
+      if (!data) return null;
+      try {
+        return JSON.parse(data) as T;
+      } catch (e) {
+        console.error('Error parsing storage data for key:', key, e);
+        return null;
+      }
     }
     return null;
   }

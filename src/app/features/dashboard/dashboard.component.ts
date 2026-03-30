@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, computed } from '@angular/core';
+import { Component, OnInit, inject, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,7 +12,7 @@ import { UserProfile } from '../../core/models/profile.model';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterLink, MatButtonModule, MatIconModule, StatCardComponent, CategoryBarComponent],
+  imports: [CommonModule, RouterLink, MatButtonModule, MatIconModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   private expenseService = inject(ExpenseService);
   private router = inject(Router);
 
-  profile: UserProfile | null = null;
+  profile = signal<UserProfile | null>(null);
   categories = CATEGORIES;
   
   // Computed dashboard data
@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
     const now = new Date();
     const month = now.getMonth() + 1;
     const year = now.getFullYear();
-    const income = this.profile?.salary || 0;
+    const income = this.profile()?.salary || 0;
 
     const monthlyExpenses = expenses.filter((e) => {
       const [eYear, eMonth] = e.date.split('-').map(Number);
@@ -71,6 +71,6 @@ export class DashboardComponent implements OnInit {
       return;
     }
     
-    this.profile = profileData;
+    this.profile.set(profileData);
   }
 }

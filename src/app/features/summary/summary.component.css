@@ -112,6 +112,86 @@
 .cat-name { font-weight: 700; color: var(--text-primary); }
 .over-amount { font-weight: 700; color: var(--accent-red); }
 
+.budget-breakdown-section {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.breakdown-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+.breakdown-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.breakdown-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.budget-info {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.progress-container {
+  height: 8px;
+  background-color: var(--bg-main);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease-out;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.status-label {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .breakdown-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .card-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .budget-info {
+    align-self: flex-end;
+  }
+}
+
 
 
 
