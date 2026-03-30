@@ -45,6 +45,7 @@ export class SetupComponent implements OnInit {
     });
 
     this.setupForm = this.fb.group({
+      name: ['', Validators.required],
       salary: [null, [Validators.required, Validators.min(1)]],
       budgets: this.fb.group(budgetGroup),
     });

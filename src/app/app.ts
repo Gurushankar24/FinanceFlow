@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { filter } from 'rxjs/operators';
 import { ExpenseService } from './core/services/expense.service';
 
+import { UserProfile } from './core/models/profile.model';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -19,7 +21,7 @@ export class App implements OnInit {
   private titleService = inject(Title);
   private expenseService = inject(ExpenseService);
 
-  profile: any = null;
+  profile: UserProfile | null = null;
   showToast = false;
 
   ngOnInit() {

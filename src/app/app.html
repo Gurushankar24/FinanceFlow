@@ -18,7 +18,7 @@
     </a>
     <a routerLink="/summary" routerLinkActive="active" class="nav-link">
       <mat-icon>flag</mat-icon>
-      <span>Summart</span>
+      <span>Summary</span>
     </a>
     <a routerLink="/setup" routerLinkActive="active" class="nav-link">
       <mat-icon>settings</mat-icon>
@@ -29,11 +29,11 @@
   <div class="sidebar-footer" *ngIf="profile">
     <div class="user-profile">
       <div class="user-avatar">
-        {{ profile.salary.toString().charAt(0) }}
+      {{ profile.name?.charAt(0)?.toUpperCase() || '?' }}
       </div>
       <div class="user-info">
-        <span class="greeting">Good morning</span>
-        <span class="status">Your Ledger is healthy</span>
+      <span class="greeting">{{ profile.name || 'User' }}</span>
+      <span class="status">Your Ledger is healthy</span>
       </div>
     </div>
   </div>

@@ -26,9 +26,17 @@ export class DashboardComponent implements OnInit {
   totalIncome: number = 0;
   totalSpent: number = 0;
   totalSaved: number = 0;
+  healthScore: number = 0;
   
   spentByCategory: { [key: string]: number } = {};
   hasExpenses: boolean = false;
+
+  get greeting(): string {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good morning';
+    if (hour < 17) return 'Good afternoon';
+    return 'Good evening';
+  }
 
   ngOnInit(): void {
     const profileData = this.expenseService.getProfile();
@@ -54,11 +62,6 @@ export class DashboardComponent implements OnInit {
     this.totalSaved = Math.max(0, this.totalIncome - this.totalSpent);
 
     this.spentByCategory = this.expenseService.getTotalSpentByCategory(month, year);
+    this.healthScore = this.expenseService.getHealthScore(month, year);
   }
-  get greeting(): string {
-  const hour = new Date().getHours();
-  if (hour < 12) return 'Good morning';
-  if (hour < 17) return 'Good afternoon';
-  return 'Good evening';
-}
 }

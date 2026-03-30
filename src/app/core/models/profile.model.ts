@@ -1,5 +1,5 @@
 export interface UserProfile {
-   name: string; 
+  name: string;
   salary: number;
   budgets: {
     [category: string]: number;

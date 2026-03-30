@@ -62,7 +62,10 @@ export class AddExpenseComponent implements OnInit {
       
       // Convert Date object to YYYY-MM-DD string
       const dateObj = formValue.date as Date;
-      const dateString = dateObj.toISOString().split('T')[0];
+      const year = dateObj.getFullYear();
+      const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const day = String(dateObj.getDate()).padStart(2, '0');
+      const dateString = `${year}-${month}-${day}`;
 
       const newExpense: Expense = {
         id: uuidv4(),

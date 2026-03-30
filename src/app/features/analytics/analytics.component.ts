@@ -10,6 +10,15 @@ import { BaseChartDirective } from 'ng2-charts';
 import { Chart, ChartConfiguration, ChartData, ChartType, registerables } from 'chart.js';
 import { ExpenseService } from '../../core/services/expense.service';
 import { CATEGORIES } from '../../shared/constants/categories';
+import { MONTHS } from '../../shared/constants/months';
+
+interface CategorySummary {
+  name: string;
+  icon: string;
+  budgeted: number;
+  spent: number;
+  diff: number;
+}
 
 // Register Chart.js modules
 Chart.register(...registerables);
@@ -35,20 +44,7 @@ export class AnalyticsComponent implements OnInit {
 
   selectedMonth: number = new Date().getMonth() + 1;
   selectedYear: number = new Date().getFullYear();
-  months = [
-    { value: 1, name: 'January' },
-    { value: 2, name: 'February' },
-    { value: 3, name: 'March' },
-    { value: 4, name: 'April' },
-    { value: 5, name: 'May' },
-    { value: 6, name: 'June' },
-    { value: 7, name: 'July' },
-    { value: 8, name: 'August' },
-    { value: 9, name: 'September' },
-    { value: 10, name: 'October' },
-    { value: 11, name: 'November' },
-    { value: 12, name: 'December' },
-  ];
+  months = MONTHS;
 
   hasExpenses: boolean = false;
 
@@ -90,7 +86,7 @@ export class AnalyticsComponent implements OnInit {
     ],
   };
 
-  summaryTable: any[] = [];
+  summaryTable: CategorySummary[] = [];
 
   ngOnInit(): void {
     this.updateAnalytics();

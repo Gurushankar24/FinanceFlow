@@ -3,5 +3,5 @@ export interface Expense {
   category: string;
   amount: number;
   date: string; // format: 'YYYY-MM-DD'
-  note: string;
+  note?: string;
 }

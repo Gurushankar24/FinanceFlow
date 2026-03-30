@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ExpenseService } from '../../core/services/expense.service';
 import { ExpenseRowComponent } from '../../shared/components/expense-row/expense-row.component';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
+import { MONTHS } from '../../shared/constants/months';
 import { CATEGORIES } from '../../shared/constants/categories';
 import { Expense } from '../../core/models/expense.model';
 
@@ -22,6 +23,7 @@ import { Expense } from '../../core/models/expense.model';
     MatDialogModule,
     MatIconModule,
     ExpenseRowComponent,
+    ConfirmDialogComponent,
   ],
   templateUrl: './transactions.component.html',
   styleUrl: './transactions.component.css',
@@ -31,20 +33,7 @@ export class TransactionsComponent implements OnInit {
   private dialog = inject(MatDialog);
 
   categories = CATEGORIES;
-  months = [
-    { value: 1, name: 'January' },
-    { value: 2, name: 'February' },
-    { value: 3, name: 'March' },
-    { value: 4, name: 'April' },
-    { value: 5, name: 'May' },
-    { value: 6, name: 'June' },
-    { value: 7, name: 'July' },
-    { value: 8, name: 'August' },
-    { value: 9, name: 'September' },
-    { value: 10, name: 'October' },
-    { value: 11, name: 'November' },
-    { value: 12, name: 'December' },
-  ];
+  months = MONTHS;
 
   selectedCategory: string = 'All';
   selectedMonth: number = new Date().getMonth() + 1;
