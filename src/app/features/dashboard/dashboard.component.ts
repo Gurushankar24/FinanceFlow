@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,13 +23,39 @@ export class DashboardComponent implements OnInit {
   profile: UserProfile | null = null;
   categories = CATEGORIES;
   
-  totalIncome: number = 0;
-  totalSpent: number = 0;
-  totalSaved: number = 0;
-  healthScore: number = 0;
-  
-  spentByCategory: { [key: string]: number } = {};
-  hasExpenses: boolean = false;
+  // Computed dashboard data
+  dashboardData = computed(() => {
+    const expenses = this.expenseService.expenses();
+    const now = new Date();
+    const month = now.getMonth() + 1;
+    const year = now.getFullYear();
+    const income = this.profile?.salary || 0;
+
+    const monthlyExpenses = expenses.filter((e) => {
+      const [eYear, eMonth] = e.date.split('-').map(Number);
+      return eYear === year && eMonth === month;
+    });
+
+    const hasExpenses = monthlyExpenses.length > 0;
+    const totalSpent = monthlyExpenses.reduce((sum, exp) => sum + exp.amount, 0);
+    const totalSaved = Math.max(0, income - totalSpent);
+    const healthScore = this.expenseService.getHealthScore(month, year);
+    
+    // Calculate spentByCategory manually here to be fully reactive to the signal
+    const spentByCategory = monthlyExpenses.reduce((acc, curr) => {
+      acc[curr.category] = (acc[curr.category] || 0) + curr.amount;
+      return acc;
+    }, {} as { [key: string]: number });
+
+    return {
+      totalIncome: income,
+      totalSpent,
+      totalSaved,
+      healthScore,
+      spentByCategory,
+      hasExpenses
+    };
+  });
 
   get greeting(): string {
     const hour = new Date().getHours();
@@ -46,22 +72,5 @@ export class DashboardComponent implements OnInit {
     }
     
     this.profile = profileData;
-    this.loadDashboardData();
-  }
-
-  private loadDashboardData(): void {
-    const now = new Date();
-    const month = now.getMonth() + 1;
-    const year = now.getFullYear();
-
-    this.totalIncome = this.profile?.salary || 0;
-
-    const monthlyExpenses = this.expenseService.getExpensesByMonth(month, year);
-    this.hasExpenses = monthlyExpenses.length > 0;
-    this.totalSpent = monthlyExpenses.reduce((sum, exp) => sum + exp.amount, 0);
-    this.totalSaved = Math.max(0, this.totalIncome - this.totalSpent);
-
-    this.spentByCategory = this.expenseService.getTotalSpentByCategory(month, year);
-    this.healthScore = this.expenseService.getHealthScore(month, year);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ExpenseService } from '../../core/services/expense.service';
 import { StatCardComponent } from '../../shared/components/stat-card/stat-card.component';
 import { CATEGORIES } from '../../shared/constants/categories';
+import { MONTHS } from '../../shared/constants/months';
 
 @Component({
   selector: 'app-summary',
@@ -31,26 +32,21 @@ export class SummaryComponent implements OnInit {
 
   selectedMonth: number = new Date().getMonth() + 1;
   selectedYear: number = new Date().getFullYear();
-  months = [
-    { value: 1, name: 'January' },
-    { value: 2, name: 'February' },
-    { value: 3, name: 'March' },
-    { value: 4, name: 'April' },
-    { value: 5, name: 'May' },
-    { value: 6, name: 'June' },
-    { value: 7, name: 'July' },
-    { value: 8, name: 'August' },
-    { value: 9, name: 'September' },
-    { value: 10, name: 'October' },
-    { value: 11, name: 'November' },
-    { value: 12, name: 'December' },
-  ];
+  months = MONTHS;
 
   totalIncome: number = 0;
   totalSpent: number = 0;
   totalSaved: number = 0;
   healthScore: number = 0;
   overBudgetCategories: any[] = [];
+
+  constructor() {
+    // Automatically re-run updateSummary whenever the expenses signal in the service changes
+    effect(() => {
+      this.expenseService.expenses(); // Subscribe to the signal
+      this.updateSummary();
+    });
+  }
 
   ngOnInit(): void {
     this.updateSummary();

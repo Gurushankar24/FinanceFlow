@@ -1,24 +1,24 @@
 <div class="dashboard-container" *ngIf="profile">
   <header class="welcome-section">
     <h2 class="welcome-title">{{ greeting }}, {{ profile?.name || 'there' }}! 👋</h2>
-    <p class="welcome-subtitle">You've saved {{ totalSaved | currency: 'INR' : 'symbol' : '1.0-0' }} this month. Keep it up!</p>
+    <p class="welcome-subtitle">You've saved {{ dashboardData().totalSaved | currency: 'INR' : 'symbol' : '1.0-0' }} this month. Keep it up!</p>
   </header>
 
   <section class="top-cards">
     <div class="balance-card">
       <div class="balance-main">
         <span class="label">Total Balance</span>
-        <h3 class="amount">{{ totalIncome | currency: 'INR' : 'symbol' : '1.0-0' }}</h3>
+        <h3 class="amount">{{ dashboardData().totalIncome | currency: 'INR' : 'symbol' : '1.0-0' }}</h3>
       </div>
       <div class="balance-stats">
         <div class="stat-item">
           <span class="stat-label">Spent</span>
-          <span class="stat-value spent">{{ totalSpent | currency: 'INR' : 'symbol' : '1.0-0' }}</span>
+          <span class="stat-value spent">{{ dashboardData().totalSpent | currency: 'INR' : 'symbol' : '1.0-0' }}</span>
         </div>
         <div class="divider"></div>
         <div class="stat-item">
           <span class="stat-label">Saved</span>
-          <span class="stat-value saved">{{ totalSaved | currency: 'INR' : 'symbol' : '1.0-0' }}</span>
+          <span class="stat-value saved">{{ dashboardData().totalSaved | currency: 'INR' : 'symbol' : '1.0-0' }}</span>
         </div>
       </div>
     </div>
@@ -26,16 +26,16 @@
     <div class="health-card">
       <div class="health-info">
         <h4 class="health-title">
-          {{ healthScore >= 80 ? 'Great Health' : healthScore >= 50 ? 'Fair Health' : 'Poor Health' }}
+          {{ dashboardData().healthScore >= 80 ? 'Great Health' : dashboardData().healthScore >= 50 ? 'Fair Health' : 'Poor Health' }}
         </h4>
         <p class="health-subtitle">
-          {{ healthScore >= 80 ? 'Your ledger is in good shape' : healthScore >= 50 ? 'Some budgets need attention' : 'You are over budget in several categories' }}
+          {{ dashboardData().healthScore >= 80 ? 'Your ledger is in good shape' : dashboardData().healthScore >= 50 ? 'Some budgets need attention' : 'You are over budget in several categories' }}
         </p>
         <button mat-button class="improve-btn" routerLink="/analytics">How to improve?</button>
       </div>
       <div class="health-chart">
         <div class="circular-progress">
-          <span class="emoji">{{ healthScore >= 80 ? '😊' : healthScore >= 50 ? '😐' : '😟' }}</span>
+          <span class="emoji">{{ dashboardData().healthScore >= 80 ? '😊' : dashboardData().healthScore >= 50 ? '😐' : '😟' }}</span>
         </div>
       </div>
     </div>
@@ -50,20 +50,20 @@
       <button mat-button class="view-all-btn" routerLink="/analytics">View Breakdown</button>
     </div>
 
-    <div class="categories-bubbles" *ngIf="hasExpenses">
+    <div class="categories-bubbles" *ngIf="dashboardData().hasExpenses">
       <div 
         *ngFor="let cat of categories.slice(0, 4); let i = index" 
         class="category-bubble-item"
         [ngClass]="'bubble-' + i"
       >
         <div class="bubble" [style.background-color]="cat.color + '20'" [style.border-color]="cat.color">
-           <span class="bubble-amount">{{ spentByCategory[cat.name] || 0 | currency: 'INR' : 'symbol' : '1.0-0' }}</span>
+           <span class="bubble-amount">{{ dashboardData().spentByCategory[cat.name] || 0 | currency: 'INR' : 'symbol' : '1.0-0' }}</span>
         </div>
         <span class="bubble-label">{{ cat.name }}</span>
       </div>
     </div>
 
-    <div *ngIf="!hasExpenses" class="empty-state">
+    <div *ngIf="!dashboardData().hasExpenses" class="empty-state">
       <mat-icon>savings</mat-icon>
       <p>No expenses recorded this month yet.</p>
     </div>

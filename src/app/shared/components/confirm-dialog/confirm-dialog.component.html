@@ -1,8 +1,16 @@
-<h2 mat-dialog-title>{{ data.title }}</h2>
-<mat-dialog-content>
-  <p>{{ data.message }}</p>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]="false">Cancel</button>
-  <button mat-raised-button color="warn" [mat-dialog-close]="true">Confirm</button>
-</mat-dialog-actions>
+<div class="confirm-dialog-wrapper">
+  <div class="header-icon">
+    <mat-icon color="warn">warning_amber</mat-icon>
+  </div>
+  
+  <h2 mat-dialog-title class="dialog-title">{{ data.title || 'Are you sure?' }}</h2>
+  
+  <mat-dialog-content class="dialog-content">
+    <p class="dialog-message">{{ data.message }}</p>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions align="center" class="dialog-actions">
+    <button mat-button class="cancel-btn" [mat-dialog-close]="false">Cancel</button>
+    <button mat-flat-button color="warn" class="confirm-btn" [mat-dialog-close]="true">Confirm Delete</button>
+  </mat-dialog-actions>
+</div>

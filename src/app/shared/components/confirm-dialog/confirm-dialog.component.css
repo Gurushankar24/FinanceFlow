@@ -1,4 +1,72 @@
-mat-dialog-actions {
-  padding: 16px 0;
-  gap: 8px;
+.confirm-dialog-wrapper {
+  padding: 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-icon {
+  width: 64px;
+  height: 64px;
+  background-color: #fee2e2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.header-icon mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.dialog-title {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0 0 12px 0;
+  padding: 0;
+  color: var(--text-primary);
+  border: none;
+}
+
+.dialog-content {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding: 0;
+  margin-bottom: 32px;
+  overflow: hidden;
+}
+
+.dialog-actions {
+  width: 100%;
+  display: flex;
+  gap: 12px;
+  padding: 0;
+  justify-content: center;
+}
+
+.cancel-btn {
+  flex: 1;
+  height: 48px !important;
+  border-radius: 24px !important;
+  font-weight: 700 !important;
+  color: var(--text-secondary) !important;
+}
+
+.confirm-btn {
+  flex: 1;
+  height: 48px !important;
+  border-radius: 24px !important;
+  font-weight: 700 !important;
+  background-color: var(--accent-red) !important;
+  color: white !important;
+}
+
+:host ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 32px !important;
+  padding: 0 !important;
 }

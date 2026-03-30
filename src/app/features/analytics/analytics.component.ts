@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -87,6 +87,14 @@ export class AnalyticsComponent implements OnInit {
   };
 
   summaryTable: CategorySummary[] = [];
+
+  constructor() {
+    // Automatically re-run updateAnalytics whenever the expenses signal in the service changes
+    effect(() => {
+      this.expenseService.expenses(); // Subscribe to the signal
+      this.updateAnalytics();
+    });
+  }
 
   ngOnInit(): void {
     this.updateAnalytics();

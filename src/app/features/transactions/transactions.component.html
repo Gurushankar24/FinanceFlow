@@ -4,7 +4,7 @@
     
     <div class="filters">
       <div class="filter-item">
-        <mat-select [(value)]="selectedMonth" (selectionChange)="onFilterChange()" class="custom-select">
+        <mat-select [value]="selectedMonth()" (selectionChange)="onMonthChange($event.value)" class="custom-select">
           <mat-option *ngFor="let month of months" [value]="month.value">
             {{ month.name }}
           </mat-option>
@@ -12,7 +12,7 @@
       </div>
 
       <div class="filter-item">
-        <mat-select [(value)]="selectedCategory" (selectionChange)="onFilterChange()" class="custom-select">
+        <mat-select [value]="selectedCategory()" (selectionChange)="onCategoryChange($event.value)" class="custom-select">
           <mat-option value="All">All Categories</mat-option>
           <mat-option *ngFor="let cat of categories" [value]="cat.name">
             {{ cat.name }}
@@ -23,12 +23,12 @@
   </header>
 
   <div class="transactions-list">
-    <div *ngIf="filteredExpenses.length === 0" class="empty-state">
+    <div *ngIf="filteredExpenses().length === 0" class="empty-state">
       <mat-icon>receipt_long</mat-icon>
       <p>No transactions found for this period.</p>
     </div>
 
-    <div *ngFor="let exp of filteredExpenses" class="transaction-item-wrapper">
+    <div *ngFor="let exp of filteredExpenses()" class="transaction-item-wrapper">
       <app-expense-row [expense]="exp"></app-expense-row>
       <button mat-icon-button color="warn" class="delete-btn" (click)="onDelete(exp.id)">
         <mat-icon>delete_outline</mat-icon>

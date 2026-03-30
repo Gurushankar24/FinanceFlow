@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal, computed } from '@angular/core';
 import { StorageService } from './storage.service';
 import { Expense } from '../models/expense.model';
 import { UserProfile } from '../models/profile.model';
@@ -12,31 +12,41 @@ export class ExpenseService {
   private readonly PROFILE_KEY = 'financeflow_profile';
   private readonly EXPENSES_KEY = 'financeflow_expenses';
 
+  // Signals for state management
+  private profileSignal = signal<UserProfile | null>(this.storage.getItem<UserProfile>(this.PROFILE_KEY));
+  private expensesSignal = signal<Expense[]>(this.storage.getItem<Expense[]>(this.EXPENSES_KEY) || []);
+
+  // Public accessors
+  profile = this.profileSignal.asReadonly();
+  expenses = this.expensesSignal.asReadonly();
+
   getProfile(): UserProfile | null {
-    return this.storage.getItem<UserProfile>(this.PROFILE_KEY);
+    return this.profileSignal();
   }
 
   saveProfile(profile: UserProfile): void {
     this.storage.setItem(this.PROFILE_KEY, profile);
+    this.profileSignal.set(profile);
   }
 
   getExpenses(): Expense[] {
-    return this.storage.getItem<Expense[]>(this.EXPENSES_KEY) || [];
+    return this.expensesSignal();
   }
 
   addExpense(expense: Expense): void {
-    const expenses = this.getExpenses();
-    expenses.push(expense);
-    this.storage.setItem(this.EXPENSES_KEY, expenses);
+    const updatedExpenses = [...this.expensesSignal(), expense];
+    this.storage.setItem(this.EXPENSES_KEY, updatedExpenses);
+    this.expensesSignal.set(updatedExpenses);
   }
 
   deleteExpense(id: string): void {
-    const expenses = this.getExpenses().filter((e) => e.id !== id);
-    this.storage.setItem(this.EXPENSES_KEY, expenses);
+    const updatedExpenses = this.expensesSignal().filter((e) => e.id !== id);
+    this.storage.setItem(this.EXPENSES_KEY, updatedExpenses);
+    this.expensesSignal.set(updatedExpenses);
   }
 
   getExpensesByMonth(month: number, year: number): Expense[] {
-    return this.getExpenses().filter((e) => {
+    return this.expensesSignal().filter((e) => {
       const [eYear, eMonth] = e.date.split('-').map(Number);
       return eYear === year && eMonth === month;
     });
@@ -74,8 +84,6 @@ export class ExpenseService {
       }
     });
 
-    // Score starts at 100, subtract points per category over budget.
-    // Assuming 100 / number of categories (8) = 12.5 points each.
     const penalty = 100 / CATEGORIES.length;
     return Math.max(0, Math.round(100 - overBudgetCount * penalty));
   }

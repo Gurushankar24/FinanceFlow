@@ -1,33 +1,33 @@
-# 💰 FinanceFlow
+# FinanceFlow
 
 A personal budget tracking app built with **Angular 21**, **Chart.js**, and **Tailwind CSS**. Set your monthly salary, define category budgets, log expenses, and get a real-time health score on how well you're sticking to your budget — all stored locally in your browser.
 
-🔗 **[Live Demo → add-your-link-here](#)**
+ **[Live Demo → add-your-link-here](#)**
 
 ---
 
-## 📸 Demo
+##  Demo
 
 > *(Add GIFs here)*
 
 ---
 
-## ✨ Features
+##  Features
 
-- 🛠️ **Onboarding Setup** — Enter your monthly salary and set per-category budget limits on first launch
-- 📊 **Dashboard** — See total income, total spent, and total saved at a glance with per-category budget bars
-- ➕ **Add Expense** — Log expenses by category, amount, date, and note
-- 🗂️ **Transactions** — View and delete all logged expenses
-- 📈 **Analytics** — Interactive bar chart (spending per category) and cumulative line chart, filterable by month and year
-- 🧾 **Monthly Summary** — Full breakdown of income vs spent vs saved with a budget comparison table
-- 🏥 **Health Score** — A 0–100 score that penalises you for each category where you've exceeded your budget
-- 💾 **Persistent Storage** — All data saved in `localStorage`, survives page refreshes
-- ⚙️ **Edit Profile** — Update your salary and budgets anytime from the setup page
-- 🌐 **SSR Ready** — Built with Angular SSR, storage handled safely with `isPlatformBrowser`
+-  **Onboarding Setup** — Enter your monthly salary and set per-category budget limits on first launch
+-  **Dashboard** — See total income, total spent, and total saved at a glance with per-category budget bars
+-  **Add Expense** — Log expenses by category, amount, date, and note
+-  **Transactions** — View and delete all logged expenses
+-  **Analytics** — Interactive bar chart (spending per category) and cumulative line chart, filterable by month and year
+-  **Monthly Summary** — Full breakdown of income vs spent vs saved with a budget comparison table
+-  **Health Score** — A 0–100 score that penalises you for each category where you've exceeded your budget
+-  **Persistent Storage** — All data saved in `localStorage`, survives page refreshes
+-  **Edit Profile** — Update your salary and budgets anytime from the setup page
+-  **SSR Ready** — Built with Angular SSR, storage handled safely with `isPlatformBrowser`
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Category | Technology |
 |---|---|
@@ -45,7 +45,7 @@ A personal budget tracking app built with **Angular 21**, **Chart.js**, and **Ta
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 src/
@@ -74,7 +74,7 @@ src/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -128,7 +128,7 @@ With 8 categories, each over-budget category costs **12.5 points**:
 
 ---
 
-## 🧠 Angular Concepts Showcased
+## Angular Concepts Showcased
 
 - **Lazy Loading** — All 6 feature pages are lazy-loaded via `loadComponent`
 - **Reactive Forms** — Setup page uses `FormBuilder`, `FormGroup`, and `Validators`
@@ -140,17 +140,8 @@ With 8 categories, each over-budget category costs **12.5 points**:
 
 ---
 
-## 📌 Roadmap
 
-- [ ] Deploy to Netlify / Vercel
-- [ ] Export transactions as CSV
-- [ ] Multi-month trend comparison chart
-- [ ] Dark mode support
-- [ ] Budget alerts when approaching limits
-
----
-
-## 👤 Author
+## Dev
 
 **Gurushankar**
 - LinkedIn: [linkedin.com/in/gurushankarv](https://www.linkedin.com/in/gurushankarv)

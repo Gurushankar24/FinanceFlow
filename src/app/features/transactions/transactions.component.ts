@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -35,38 +35,40 @@ export class TransactionsComponent implements OnInit {
   categories = CATEGORIES;
   months = MONTHS;
 
-  selectedCategory: string = 'All';
-  selectedMonth: number = new Date().getMonth() + 1;
-  selectedYear: number = new Date().getFullYear();
+  // Filter state as signals
+  selectedCategory = signal<string>('All');
+  selectedMonth = signal<number>(new Date().getMonth() + 1);
+  selectedYear = signal<number>(new Date().getFullYear());
 
-  filteredExpenses: Expense[] = [];
+  // Computed filtered expenses
+  filteredExpenses = computed(() => {
+    const expenses = this.expenseService.expenses();
+    const category = this.selectedCategory();
+    const month = this.selectedMonth();
+    const year = this.selectedYear();
 
-  ngOnInit(): void {
-    this.loadExpenses();
-  }
+    let filtered = expenses;
 
-  loadExpenses(): void {
-    let expenses = this.expenseService.getExpenses();
-
-    // Filter by Category
-    if (this.selectedCategory !== 'All') {
-      expenses = expenses.filter((e) => e.category === this.selectedCategory);
+    if (category !== 'All') {
+      filtered = filtered.filter((e) => e.category === category);
     }
 
-    // Filter by Month and Year
-    expenses = expenses.filter((e) => {
+    filtered = filtered.filter((e) => {
       const [eYear, eMonth] = e.date.split('-').map(Number);
-      return eYear === this.selectedYear && eMonth === this.selectedMonth;
+      return eYear === year && eMonth === month;
     });
 
-    // Sort by Date (newest first)
-    this.filteredExpenses = expenses.sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-    );
+    return filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  });
+
+  ngOnInit(): void {}
+
+  onCategoryChange(category: string): void {
+    this.selectedCategory.set(category);
   }
 
-  onFilterChange(): void {
-    this.loadExpenses();
+  onMonthChange(month: number): void {
+    this.selectedMonth.set(month);
   }
 
   onDelete(id: string): void {
@@ -81,7 +83,6 @@ export class TransactionsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.expenseService.deleteExpense(id);
-        this.loadExpenses();
       }
     });
   }
