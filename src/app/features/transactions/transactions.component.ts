@@ -23,7 +23,6 @@ import { Expense } from '../../core/models/expense.model';
     MatDialogModule,
     MatIconModule,
     ExpenseRowComponent,
-    ConfirmDialogComponent,
   ],
   templateUrl: './transactions.component.html',
   styleUrl: './transactions.component.css',

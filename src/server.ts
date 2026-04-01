@@ -13,7 +13,14 @@ const app = express();
 
 // Add permissive CSP for development
 app.use((req, res, next) => {
-  res.setHeader('Content-Security-Policy', "default-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:4200 ws://localhost:4200; connect-src 'self' http://localhost:4200 ws://localhost:4200 http://localhost:4200/.well-known/appspecific/com.chrome.devtools.json;");
+  res.setHeader(
+    'Content-Security-Policy',
+    "default-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:4200 ws://localhost:4200; " +
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+      "font-src 'self' https://fonts.gstatic.com; " +
+      "img-src 'self' data: blob:; " +
+      "connect-src 'self' http://localhost:4200 ws://localhost:4200 http://localhost:4200/.well-known/appspecific/com.chrome.devtools.json;"
+  );
   next();
 });
 
