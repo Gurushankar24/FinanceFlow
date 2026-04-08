@@ -29,11 +29,11 @@
   <div class="sidebar-footer" *ngIf="profile">
     <div class="user-profile">
       <div class="user-avatar">
-      {{ profile.name.charAt(0).toUpperCase() || '?' }}
+        {{ profile?.name ? profile.name.charAt(0).toUpperCase() : '?' }}
       </div>
       <div class="user-info">
-      <span class="greeting">{{ profile.name || 'User' }}</span>
-      <span class="status">Your Ledger is healthy</span>
+        <span class="greeting">{{ profile.name || 'User' }}</span>
+        <span class="status">Your Ledger is healthy</span>
       </div>
     </div>
   </div>
