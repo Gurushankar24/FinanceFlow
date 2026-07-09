@@ -2,7 +2,7 @@
 
 A personal finance tracker I built to get better at budgeting. You set your monthly salary, split it across categories like food, transport, bills etc., log your expenses as you go, and the app tells you how well you're actually sticking to your plan.
 
-**[Live Demo → add-your-link-here](#)**
+**[Live Demo](https://financeflow24.netlify.app/)**
 
 ---
 
