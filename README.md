@@ -61,7 +61,6 @@ The health score is a number from 0 to 100. It starts at 100 and drops by ~12.5 
 | Charts | Chart.js 4 + ng2-charts |
 | Forms | Angular Reactive Forms |
 | Routing | Lazy-loaded standalone components |
-| SSR | Angular SSR + Express 5 |
 | Storage | localStorage (SSR-safe) |
 | Language | TypeScript 5.9 |
 
