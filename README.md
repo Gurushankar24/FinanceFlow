@@ -98,7 +98,7 @@ src/
 ##  Running locally
 
 ```bash
-git clone https://github.com/your-username/FinanceFlow.git
+git clone https://github.com/Gurushankar24/FinanceFlow.git
 cd FinanceFlow
 npm install
 ng serve
